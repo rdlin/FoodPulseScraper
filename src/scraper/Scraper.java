@@ -25,14 +25,20 @@ public class Scraper {
 			String recipesPageUrl = "http://allrecipes.com/recipes/main.aspx?Page="
 					+ currentPage;
 			try {
-				UserAgent userAgent = new UserAgent(); // open HTML from a
-														// String.
+				UserAgent userAgent = new UserAgent();
 				userAgent.visit(recipesPageUrl);
 				// getting the recipe icon element
 				Elements recipeDivs = userAgent.doc
 						.findEvery("< id=divGridItemWrapper>");
+				
+				int recipeCount = 0;
 				// iterate through elements and scrape recipe information
 				for (Element recipeDiv : recipeDivs) {
+					// for some reason the first page has Staff Picks, this skips those to avoid duplicates
+					if(currentPage == 1 && recipeCount <= 7) {
+						recipeCount++;
+						continue;
+					}
 					// get link
 					Element a = recipeDiv.findFirst("<a>");
 					String recipeUrl = a.getAt("href");
@@ -70,7 +76,7 @@ public class Scraper {
 					recipe.setRecipeUrl(recipeUrl);
 					recipe.setDescription(recipeDescriptionString);
 					recipe.setTags(tags);
-					recipes.add(recipe);
+					recipes.add(recipe);	
 				}
 			} catch (JauntException e) {
 				System.err.println(e);
@@ -112,7 +118,7 @@ public class Scraper {
 					.substring(0, dashIndex);
 		}
 		int toIndex = ingredientText.indexOf(" to ");
-		if (dashIndex != -1) {
+		if (toIndex != -1) {
 			ingredientText = ingredientText
 					.substring(0, toIndex);
 		}
