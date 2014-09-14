@@ -3,5 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="C:/Users/Robert/Desktop/Projects/Java jars/jaunt0.9.8.1/jaunt0.9.8.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Robert/Desktop/Projects/Java jars/mongo-java-orm-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Robert/Desktop/Projects/Java jars/mongo-java-driver-2.9.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
